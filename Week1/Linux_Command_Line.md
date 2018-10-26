@@ -62,6 +62,37 @@ If you wish to copy entire direcory including all the contents inside of it, you
 ```
 $ mv [src] [dest]
 ```
-**"mv"** command will allow you to **rename a file**, or **move** it from [src] to [destination].
+**"mv"** command will allow you to **rename a file**, or **move** it from [src] to [destination].\
 
 ## Intermediate Commands
+### echo
+```
+$ echo [string you want to put] >> [file_name]
+```
+**"echo"** is usually used to put text into a file. For example, if you want to create a new text file or add to an already exist text file, you just need to type **"echo hello, my name is Ha >> new.txt"**. This does not require back slash for space.
+
+### cat
+```
+$ cat [file_name]
+```
+Command **"cat"** is used to display the contents of a file. It is usually used to easiliy view programs.
+
+### sudo
+```
+$ sudo [command]
+```
+A widely used command in the Linux command line, sudo stands for **"SuperUser Do"**. So, if you want any command to be done with administrative or root privileges, you can use the sudo command.
+
+### df
+```
+$ df
+$ df -m
+```
+**"df"** command to see the available disk space in each of the partitions in your system. This will allow you to see each mounted partition and their used/available space in % and in KBs.\
+If you want it shown in megabytes, you can use the command **"df -m"**.
+
+### du
+```
+$ du [dir_name/file_name]
+```
+**"du"** is used to know the disk usage of a file in your system. To know the disk usage for a particular folder or file, you can type **"du folder/file_name"**. For example, if you want to know the disk space used by the documents folder in Linux, you can use the command **"du Documents"**. You can also use the command “ls -lah” to view the file sizes of all the files in a folder.
