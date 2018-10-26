@@ -22,4 +22,9 @@ To run the program, we need to type below:
 ```
 $ ./a.out
 ```
-.(dot) means look in current directory, and /(slash) mean seperater - seperate folder name, and a.out is the name of program.
+.(dot) means look in current directory, and /(slash) mean seperater - seperate folder name, and a.out is the name of program./
+To change the output name, put [-o] after compiler, and put name you want to give for the output file.
+```
+clang -o hello hello.c
+```
+
