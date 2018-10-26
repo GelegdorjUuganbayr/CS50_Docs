@@ -58,8 +58,10 @@ $ cp -r [src_dir] [dest_dir]
 Use the **"cp"** command to copy files through the command line. It takes two arguments: The first is the location of the file to be copied, the second is where to copy.\
 If you wish to copy entire direcory including all the contents inside of it, you can type **"cp -r"**. The **"-r"** stands for recursive ,and tells cp to dive down into the directory and copy everything inside of it.
 
-## mv
+### mv
 ```
 $ mv [src] [dest]
 ```
 **"mv"** command will allow you to **rename a file**, or **move** it from [src] to [destination].
+
+## Intermediate Commands
