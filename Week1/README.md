@@ -3,7 +3,7 @@ How human language is translated to what a computer can understand (binary)
 Source code -> Compiler -> Machine code (Binary)
 
 File name should be consist of lower case with underline instead of space (by convention)
-###hello.c
+### hello.c
 ```c
 #include <stdio.h>
 
