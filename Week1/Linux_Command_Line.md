@@ -62,8 +62,8 @@ If you wish to copy entire direcory including all the contents inside of it, you
 ```
 $ mv [src] [dest]
 ```
-**"mv"** command will allow you to **rename a file**, or **move** it from [src] to [destination].\n
-
+**"mv"** command will allow you to **rename a file**, or **move** it from [src] to [destination].\
+\
 
 ## Intermediate Commands
 ### echo
