@@ -96,3 +96,11 @@ If you want it shown in megabytes, you can use the command **"df -m"**.
 $ du [dir_name/file_name]
 ```
 **"du"** is used to know the disk usage of a file in your system. To know the disk usage for a particular folder or file, you can type **"du folder/file_name"**. For example, if you want to know the disk space used by the documents folder in Linux, you can use the command **"du Documents"**. You can also use the command “ls -lah” to view the file sizes of all the files in a folder.
+
+### chmod
+```
+$ chmod +x [file_name]
+```
+**"chmod"** to make a file executable and to change the permissions granted to it in Linux.\
+For example, when you have a python code named numbers.py. You'll need to run **“python numbers.py”**. When you make it executable, you'll just need to run **“numbers.py”** to run the file.\
+To make a file executable, you can use the command **“chmod +x numbers.py”**. You can use **“chmod 755 numbers.py”** to give it root permissions or **“sudo chmod +x numbers.py”** for root executable.
