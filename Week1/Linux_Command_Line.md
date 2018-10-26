@@ -65,7 +65,7 @@ $ mv [src] [dest]
 **"mv"** command will allow you to **rename a file**, or **move** it from [src] to [destination].\
 <br/>
 
-## Intermediate Commands
+# Intermediate Commands
 ### echo
 ```
 $ echo [string you want to put] >> [file_name]
