@@ -3,7 +3,7 @@
 ```
 $ pwd
 ```
-Present working directory./
+Present working directory.\
 It gives us the absolute path, which means the path that starts from the root.
 
 
