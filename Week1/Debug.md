@@ -1,5 +1,5 @@
 # Debug
->> Way to debug here is for **CS50 IDE**.
+> Debug method for the **CS50 IDE**.
 ### help50
 ```
 $ help50 make [file_name]
