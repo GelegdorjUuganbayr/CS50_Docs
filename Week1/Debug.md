@@ -7,8 +7,9 @@ $ help50 make [file_name]
 This will allow you to find the compile error.
 
 ## eprintf
-**[eprintf.c]**
+
 ```cpp
+**[eprintf.c]**
 #import <cs50.h>
 #import <stdio.h>
 
