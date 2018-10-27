@@ -1,12 +1,12 @@
 # Debug
 > Debug method for the **CS50 IDE**.
-### help50
+## help50
 ```
 $ help50 make [file_name]
 ```
 This will allow you to find the compile error.
 
-### eprintf
+## eprintf
 **[eprintf.c]**
 ```cpp
 #import <cs50.h>
