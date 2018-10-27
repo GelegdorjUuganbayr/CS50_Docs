@@ -25,3 +25,11 @@ Hello, world
 eprintf.c.7: Checking error
 ```
 This will show where the print is to debug the code.
+
+## debug50
+Set the break point first, then run until the break point.
+```
+$ debug50 ./a.out
+```
+Once you type above, the program will run until break point and freeze.\
+You can resume, step over, step into, or step out.
