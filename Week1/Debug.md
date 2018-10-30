@@ -33,3 +33,27 @@ $ debug50 ./a.out
 ```
 Once you type above, the program will run until break point and freeze.\
 You can resume, step over, step into, or step out.
+
+## GDB
+To kick off with GDB
+```
+$ gdb [program name]
+```
+This will pull up the GDB environment. From this point, the next two major commands you will likely use are:
+```
+b [function name/line number]
+```
+Make it so that once your program begins, it will run uninterupted until it encounters the function with that name or hits that ine number, at which point the program will pause execution and await further input.
+```
+r [command-line argument]
+```
+Runs the program with the command line arguments provided if any.
+
+| n           | Step forward one block of code                                        |
+|-------------|-----------------------------------------------------------------------|
+| s           | Step forward one line of code                                         |
+| p [variable | Prints out the value of the variable given                            |
+| info local  | Prints out the values of all local variables                          |
+| bt          | Shows what series of function calls have led you to the current point |
+| q           | Quits GDB                                                             |
+
