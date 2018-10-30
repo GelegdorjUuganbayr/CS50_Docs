@@ -86,3 +86,15 @@ fwrite([buffer],[size],[qty],[file_pointer]);
 int arr[3] = {1, 2, 3};
 fwrite(arr, sizeof(int), 3, ptr);
 ```
+
+### File Pointers functions
+
+| Function  | Description                                                    |
+|-----------|----------------------------------------------------------------|
+| fgets()   | Reads a full string from a file                                |
+| fputs()   | Writes a full string to a file                                 |
+| fprintf() | Writes a formatted string to a file                            |
+| fseek()   | Allows you rewind or fast-forward within a file                |
+| ftell()   | Tells you at what (byte) position you are at within a file     |
+| feof()    | Tells you whether you've read to the end of a file             |
+| ferror()  | Indicates whether an error has occurred in working with a file |
