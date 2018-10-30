@@ -49,11 +49,11 @@ r [command-line argument]
 ```
 Runs the program with the command line arguments provided if any.
 
-| n           | Step forward one block of code                                        |
-|-------------|-----------------------------------------------------------------------|
-| s           | Step forward one line of code                                         |
-| p [variable | Prints out the value of the variable given                            |
-| info local  | Prints out the values of all local variables                          |
-| bt          | Shows what series of function calls have led you to the current point |
-| q           | Quits GDB                                                             |
+| n            | Step forward one block of code                                        |
+|--------------|-----------------------------------------------------------------------|
+| s            | Step forward one line of code                                         |
+| p [variable] | Prints out the value of the variable given                            |
+| info local   | Prints out the values of all local variables                          |
+| bt           | Shows what series of function calls have led you to the current point |
+| q            | Quits GDB                                                             |
 
