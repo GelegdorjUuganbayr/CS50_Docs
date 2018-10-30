@@ -19,7 +19,7 @@ We can measure an algorithm based on how it handles these inputs. We don't actua
 | O(\infty)  | Infinite time     |
 
 ## Sorts
-### Selection Sort [O(n^2)]
+### Selection Sort - O(n^2)
 To find the smallest unsorted element and add it to the end of the sorted list.
 
 #### [pseudocode]
@@ -27,4 +27,16 @@ To find the smallest unsorted element and add it to the end of the sorted list.
 Repeat until no unsorted elements remain:
   Search the unsorted part of the data to find the smallest value
   Swap the smallest found value with the first element of the unsorted part
+```
+
+### Bubble Sort - 
+To move higher valued elements generally towards the right and lower value elements generally towards the left.
+
+#### [pseudocode]
+```
+Set swap counter to a non-zero value
+Repeat until the swap counter is 0:
+  Reset swap counter to 0
+  Look at each adjacent pair
+    if two adjacent elements are not in order, swap them and add one to the swap counter
 ```
