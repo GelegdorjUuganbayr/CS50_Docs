@@ -11,8 +11,8 @@ We can measure an algorithm based on how it handles these inputs. We don't actua
 | O(log n)   | Logarithmic time  |
 | O(n)       | Linear time       |
 | O(n log n) | Linearithmic time |
-| O(n^2)     | Quadratic time    |
-| O(N^c)     | Polynomial time   |
-| O(c^n)     | Exponential time  |
+| O(n^{2})     | Quadratic time    |
+| O(N^{c})     | Polynomial time   |
+| O(c^{n})     | Exponential time  |
 | O(n!)      | Factorial time    |
 | O(\infty)  | Infinite time     |
