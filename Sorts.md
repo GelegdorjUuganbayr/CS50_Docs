@@ -12,10 +12,19 @@ We can measure an algorithm based on how it handles these inputs. We don't actua
 | O(log n)   | Logarithmic time  |
 | O(n)       | Linear time       |
 | O(n log n) | Linearithmic time |
-| O(n^{2})   | Quadratic time    |
-| O(n^{c})   | Polynomial time   |
-| O(c^{n})   | Exponential time  |
+| O(n^2)     | Quadratic time    |
+| O(n^c)     | Polynomial time   |
+| O(c^n)     | Exponential time  |
 | O(n!)      | Factorial time    |
 | O(\infty)  | Infinite time     |
 
-##
+## Sorts
+### Selection Sort [O(n^2)]
+To find the smallest unsorted element and add it to the end of the sorted list.
+
+#### [pseudocode]
+```
+Repeat until no unsorted elements remain:
+  Search the unsorted part of the data to find the smallest value
+  Swap the smallest found value with the first element of the unsorted part
+```
