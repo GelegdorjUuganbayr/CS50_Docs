@@ -126,7 +126,7 @@ It is pplies to positive integers and speculates that it is always possible to g
 - Otherwise, if n is odd, repeat this process on 3n + 1
 
 #### [C Code]
-'''cpp
+```cpp
 int collatz(int n)
 {
     // base case
