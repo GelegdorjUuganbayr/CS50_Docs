@@ -15,6 +15,7 @@
 - After obtaining memory for you, **malloc()** will return a **pointer** to that memory.
 - If **malloc()** cannot give you memory, it will return NULL.
 
+## Allocating Dynamic Memory
 ```cpp
 // Statically obtain an interger
 intx;
