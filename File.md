@@ -98,3 +98,32 @@ fwrite(arr, sizeof(int), 3, ptr);
 | ftell()   | Tells you at what (byte) position you are at within a file     |
 | feof()    | Tells you whether you've read to the end of a file             |
 | ferror()  | Indicates whether an error has occurred in working with a file |
+
+
+# BMP file
+
+
+| Header Name                | Bytes    |
+|----------------------------|----------|
+| BITMAPFILEHEADER           | 14 bytes |
+| BITMAPINFOHEADER           | 40 bytes |
+
+#### Smile face [24-bit BMP]
+- [000000] == **[Blue<00>,Green<00>,Red<00>]**
+- value can be between 0 ~ 255 (00 ~ ff)
+
+```BMP
+ffffff  ffffff  0000ff  0000ff  0000ff  0000ff  ffffff  ffffff
+ffffff  0000ff  ffffff  ffffff  ffffff  ffffff  0000ff  ffffff
+0000ff  ffffff  0000ff  ffffff  ffffff  0000ff  ffffff  0000ff
+0000ff  ffffff  ffffff  ffffff  ffffff  ffffff  ffffff  0000ff
+0000ff  ffffff  0000ff  ffffff  ffffff  0000ff  ffffff  0000ff
+0000ff  ffffff  ffffff  0000ff  0000ff  ffffff  ffffff  0000ff
+ffffff  0000ff  ffffff  ffffff  ffffff  ffffff  0000ff  ffffff
+ffffff  ffffff  0000ff  0000ff  0000ff  0000ff  ffffff  ffffff
+```
+
+Should be able to see the value above with:
+- Start with byte to 54: BITMAPFILEHEADER + BITMAPINFOHEADER
+- Bytes per row to 24: 8px per row
+- Bytes per column to 3: 24bits per pixel (BGL)
