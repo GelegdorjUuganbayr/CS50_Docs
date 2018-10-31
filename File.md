@@ -108,11 +108,11 @@ fwrite(arr, sizeof(int), 3, ptr);
 | BITMAPFILEHEADER           | 14 bytes |
 | BITMAPINFOHEADER           | 40 bytes |
 
-#### Smile face [24-bit BMP]
+#### Smile face [8x8, 24-bit BMP]
 - [000000] == **[Blue<00>,Green<00>,Red<00>]**
 - value can be between 0 ~ 255 (00 ~ ff)
 
-```BMP
+```
 ffffff  ffffff  0000ff  0000ff  0000ff  0000ff  ffffff  ffffff
 ffffff  0000ff  ffffff  ffffff  ffffff  ffffff  0000ff  ffffff
 0000ff  ffffff  0000ff  ffffff  ffffff  0000ff  ffffff  0000ff
@@ -127,3 +127,72 @@ Should be able to see the value above with:
 - Start with byte to 54: BITMAPFILEHEADER + BITMAPINFOHEADER
 - Bytes per row to 24: 8px per row
 - Bytes per column to 3: 24bits per pixel (BGL)
+
+#### small square [3x3, 24-bit BMP]
+Each scanline in small.bmp thus takes up 3 x 3 = 9 bytes, which is not a multiple of 4.\
+And so the scanline is "padded" with as many zeroes as it takes to extend the scanline’s length to a multiple of 4.\
+since (3px) × (3px) + (3 bytes of padding) = 12 bytes, 3 bytes' worth of zeroes are needed, which is indeed a multiple of 4.
+
+```
+00ff00 00ff00 00ff00 000000
+00ff00 ffffff 00ff00 000000
+00ff00 00ff00 00ff00 000000
+```
+
+## BMP header
+#### [bmp.h]
+- Size of BMP file will be 14bytes[BITMAPFILEHEADER] + 40bytes[BITMAPINFOHEADER] + 3bytes x (w x h)
+
+```cpp
+// BMP-related data types based on Microsoft's own
+
+#include <stdint.h>
+
+// aliases for C/C++ primitive data types
+// https://msdn.microsoft.com/en-us/library/cc230309.aspx
+typedef uint8_t  BYTE;
+typedef uint32_t DWORD;
+typedef int32_t  LONG;
+typedef uint16_t WORD;
+
+// information about the type, size, and layout of a file
+// https://msdn.microsoft.com/en-us/library/dd183374(v=vs.85).aspx
+typedef struct
+{
+    WORD bfType;
+    DWORD bfSize;
+    WORD bfReserved1;
+    WORD bfReserved2;
+    DWORD bfOffBits;
+} __attribute__((__packed__))
+BITMAPFILEHEADER;
+
+// information about the dimensions and color format
+// https://msdn.microsoft.com/en-us/library/dd183376(v=vs.85).aspx
+typedef struct
+{
+    DWORD biSize;
+    LONG biWidth;
+    LONG biHeight;
+    WORD biPlanes;
+    WORD biBitCount;
+    DWORD biCompression;
+    DWORD biSizeImage;
+    LONG biXPelsPerMeter;
+    LONG biYPelsPerMeter;
+    DWORD biClrUsed;
+    DWORD biClrImportant;
+} __attribute__((__packed__))
+BITMAPINFOHEADER;
+
+// relative intensities of red, green, and blue
+// https://msdn.microsoft.com/en-us/library/dd162939(v=vs.85).aspx
+typedef struct
+{
+    BYTE rgbtBlue;
+    BYTE rgbtGreen;
+    BYTE rgbtRed;
+} __attribute__((__packed__))
+RGBTRIPLE;
+
+```
