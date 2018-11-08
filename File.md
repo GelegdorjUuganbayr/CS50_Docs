@@ -10,6 +10,7 @@ fgetc()
 fputc()
 fread()
 fwrite()
+fseek()
 ```
 
 ### fopen()
@@ -87,6 +88,20 @@ int arr[3] = {1, 2, 3};
 fwrite(arr, sizeof(int), 3, ptr);
 ```
 
+### fseek()
+- The C library function fseek sets the file position of the stream to the given offset.
+
+```cpp
+int fseek(FILE *stream, long int offset, int whence)
+```
+
+- stream − This is the pointer to a FILE object that identifies the stream.
+- offset − This is the number of bytes to offset from whence.
+- whence − This is the position from where offset is added. It is specified by one of the following constants.
+  - SEEK_SET: Beginning of file 
+  - SEEK_CUR: Current position of the file pointer
+  - SEEK_END: End of file
+  
 ### File Pointers functions
 
 | Function  | Description                                                    |
