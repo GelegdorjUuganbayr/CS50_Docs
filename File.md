@@ -101,7 +101,7 @@ int fseek(FILE *stream, long int offset, int whence)
   - SEEK_SET: Beginning of file 
   - SEEK_CUR: Current position of the file pointer
   - SEEK_END: End of file
-  
+- Return Value - This function returns zero if successful, or else it returns a non-zero value.
 ### File Pointers functions
 
 | Function  | Description                                                    |
