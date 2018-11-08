@@ -37,3 +37,93 @@ Trouble: Dynamically-allocated memory is not automatically returned to the syste
 - Failing to return memory back to the system, it results in a **memory leak** which can compromise your system's performance.
 - When you finish working with dynamically-allocated memory, you must **free()** it.
 - Do not free twice.
+
+### realloc
+```cpp
+// If number not found in list, add to list
+if (!found)
+{
+  // Check whether enough space for number
+  if (size == capacity)
+  {
+    // Allocate space for number
+    number = realloc(numbers, sizeof(int) * (size + 1));
+    if (!numbers)
+    {
+      return 1;
+    }
+    capacity++
+  }
+  
+  // Add number to list
+  number[size] = number;
+  size++
+}
+```
+
+- Processing time is linear since it allocate memory and copy the values
+
+### node
+```cpp
+typedef struct node
+{
+  int number;
+  struct node *next;
+}
+node;
+
+int main(void)
+{
+  // memory for numbers
+  node *numbers = NULL;
+  
+  while (true)
+  {
+  
+  // Check whether number is already in list
+  bool found = false;
+  for (node *ptr = numbers; ptr != NULL; ptr = ptr->next)
+  {
+    if (ptr->number == number)
+    {
+      found = true;
+      break;
+    }
+  }
+  
+  if (!found)
+  {
+    // Allocate space for number
+    node *n = malloc(sizeof(node));
+    
+    // Add number to list
+    n->number = number;
+    n->next = NULL;
+    if (numbers)
+    {
+      for (node *ptr = numbers; ptr != NULL; ptr = ptr->next)
+      {
+        if (!ptr->next) // ptr->next == NULL
+        {
+          ptr->next = n;
+          break;
+        }
+      }
+    }
+    else
+    {
+      numbers = n;
+    }
+  }
+  // Free memory
+  node *ptr = numbers;
+  while (ptr != NULL)
+  {
+    node *next = ptr->next;
+    free(ptr);
+    ptr = next;
+  }
+}
+  
+  
+```
