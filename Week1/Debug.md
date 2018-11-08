@@ -58,3 +58,8 @@ Runs the program with the command line arguments provided if any.
 | bt           | Shows what series of function calls have led you to the current point |
 | q            | Quits GDB                                                             |
 
+## valgrind
+- Find a memory related bug
+```
+help50 valgrind ./a
+```
