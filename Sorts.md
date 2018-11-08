@@ -140,3 +140,15 @@ int collatz(int n)
         return 1 + collatz(n*3 + 1);
 }
 ```
+
+## Binary search
+```cpp
+bool search(int n, node*tree)
+{
+  if (tree == NULL)
+    return false
+  else if (n < tree->n)
+    return search(n, tree->left);
+  else if (n > tree->n)
+    return search(n, tree->right);
+}
