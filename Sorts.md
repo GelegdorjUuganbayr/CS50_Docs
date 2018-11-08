@@ -151,4 +151,6 @@ bool search(int n, node*tree)
     return search(n, tree->left);
   else if (n > tree->n)
     return search(n, tree->right);
+  else
+    true;
 }
