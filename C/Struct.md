@@ -113,11 +113,11 @@ b. If the current node's val field is what we are looking for, report success
 c. If not, set the traversal pointer to the next pointer in the list and go back to step b.
 d. If you've reached the end of the list, report failure.
 
-**Data visualisation**
-|  2  |  *3  |
-|  3  |  *5  |
-|  5  |  *6  |
-|  6  |  *8  |
+**Data visualisation**\
+|  2  |  *3  |\
+|  3  |  *5  |\
+|  5  |  *6  |\
+|  6  |  *8  |\
 |  8  | NULL |
 
 ### Insert a new node into the linked list
@@ -131,10 +131,10 @@ b. Check to make sure we didn't run out of memory.
 c. Populate and insert the node at the beginning of the linked list. (because it needs to traverse till end)
 d. Return a pointer to the new head of the linked list.
 
-**Data visualisation**
-|  3  |  *5  | - new 
-|  5  |  *6  |
-|  6  |  *8  |
+**Data visualisation**\
+|  3  |  *5  | - new \
+|  5  |  *6  |\
+|  6  |  *8  |\
 |  8  | NULL |
 
 ### Delete an entire linked list
@@ -147,3 +147,143 @@ b. Delete the rest of the list.
 c. Free the current node.
 
 # Hash Tables
+
+# Tries
+- map key-value pairs
+  - keys: four-digit years (yyyy)
+  - values: name of universities founded during those years.
+- In a trie, the paths from a central root node to a leaf node, would be labeled with digits of the year
+- Each node on the path from root to leaf could have 10 pointers emanating from it, one for each digit.
+
+```C
+typedef struct _trie
+{
+  char university[20];
+  struct _trie* path[10];
+}
+trie;
+```
+Trade off
+- big space of memory <-> quick insertion, deletion, and look-up
+
+# Stacks
+The data structure that is implemeted in one of two ways
+- as an array
+- as a linked list
+
+When data is added to the stack, it sits **On top**. The most recently added element is the only element that can legally be removed.
+- LIFO (Last in, first out)
+
+Two operation that may legally be performed on a stack
+- Push: Add a new element to the top of the stack
+- Pop: Remove the most recently-added element from the top of the stack
+
+```C
+typedef struct _stack
+{
+  VALUE array[CAPACITY];
+  int top;
+}
+stack;
+```
+
+Push() needs to:
+- Accept a pointer to the stack.
+- Accept data of type VALUE to be added to the stack.
+- Add that data to the stack at the top of the stack.
+- Change the location of the top of the stack.
+```C
+void push(stack* s, VALUE data);
+
+stack s;
+s.top = 0;
+push(&s, 28); // s.top == 1
+push(&s, 33); // s.top == 2
+push(&s, 19); // s.top == 3
+```
+
+Pop() needs to:
+- Accept a pointer to the stack
+- Change the location of the top of the stack.
+- Return the value that was removed from the stack.
+```C
+VALUE pop(stack* s);
+int x = pop(&s); s.top == 2 [28, 33]
+int x = pop(&s); s.top == 1 [28]
+int x = pop(&s); s.top == 0 []
+```
+
+### Linked list based stack
+```C
+typedef struct _stack
+{
+  VALUE val;
+  struct_stack *next;
+}
+stack;
+```
+
+Maintain a pointer to the head of the linked list
+
+# Queue
+When data is added to the queue, it is tacked onto the end, and so if an element needs to be removed, the element at the front is the only element that can legally be removed.
+- FIFO (First in, first out)
+
+Two operation that legally be performed on a queue
+- Enqueue: Add a new element to the end of the queue.
+- Dequeue: Remove the oldest element from the front of the queue.
+```C
+// Array based queue
+typedef struct _queue
+{
+  VALUE array[CAPACITY];
+  int front;
+  int size;
+}
+queue;
+
+queue q;
+q.front = 0;
+q.size = 0;
+```
+
+Enqueue() needs to:
+- Accept a pointer to the queue.
+- Accept data of type VALUE to be added to the queue.
+- Add that data to the queue at the end of the queue.
+- Change the size of the queue.
+```C
+void enqueue(queue *q, VALUE data);
+
+enqueue(&q, 28); // q.front = 0, q.size = 1
+enqueue(&q, 33); // q.front = 0, q.size = 2
+enqueue(&q, 19); // q.front = 0, q.size = 3
+```
+
+Dequeue() needs to:
+- Accept a pointer to the queue.
+- Change the location of the front of the queue
+- Decrease the size of the queue.
+- Return the value that was removed from the queue.
+```C
+int x = dequeue(&q) // q.front = 1, q.size = 2
+int x = dequeue(&q) // q.front = 2, q.size = 1
+```
+
+### Linked list based queue
+```C
+typedef struct _queue
+{
+  VALUE val;
+  struct _queue *prev;
+  struct _queue *next;
+}
+queue;
+```
+
+- Always maintain pointers to the head and tail of the linked list (global)
+- Dynamically allocate a new node
+- Set its next pointer to NULL, set its prev pointer to the tail
+- Set the tail's next pointer to the new node
+- Move the tail pointer to the newly-created node
+
