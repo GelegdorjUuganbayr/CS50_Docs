@@ -185,6 +185,8 @@ Hypertext Markup Language: A fundamental component of every website.
 | \<img src=X ... /\>      | Displaying an image located at X, with possible additional attributes                      |
 | \<!DOCTYPE html\>        | Specific to HTML5, lets the browser know that's the standard you are using.                |
 
+---
+
 # CSS
 
 Cascading Style Sheets
