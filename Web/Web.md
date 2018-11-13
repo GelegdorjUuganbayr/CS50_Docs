@@ -134,5 +134,54 @@ POST request-target HTTP/1.1
 | Client Error | 404  | Not Found             | Server cannot find what was asked for.                               |
 | Server Error | 500  | Internal Server Error | Generic server failure in responding to the otherwise-valid request. |
 
+---
+
+# HTML
+Hypertext Markup Language: A fundamental component of every website.
+- It is a language, but it is not a program language.
+  - It lacks concept of variables, logic, funtions, and the like.
+- It is a markup language
+  - Using angle-bracket enclosed tags to semantically defin the structure of a web page
+  - Causing the plain text inside of sets of tags to be interpreted by web browsers in different ways.
+```html
+<html>
+  <head>
+    <title>
+      Hello, world
+    </title>
+  </head>
+  <body>
+    World, hello
+  </body>
+</html>  
+```
+- head: make render correctly
+- title: words for a tab of a browser
+- body: contents
+- The markup allows us to convey extra information about the text we've written.
+- There are over 100 HTML tags, and lots of great resources online to find them.
+- Another interesting way to learn about HTML tags is to view the source of a website you frequentl by opening up your browser of choice's developer tools.
+
+### Common HTML tags
+
+| Tag                      | Description                                                                                |
+|--------------------------|--------------------------------------------------------------------------------------------|
+| \<b\>, \</b\>            | Rendered in blodface by the browser.                                                       |
+| \<i\>, \</i\>            | Rendered in italics by the browser.                                                        |
+| \<u\>, \</u\>            | Rendered underlined by the browser.                                                        |
+| \<p\>, \</p\>            | Rendered as a paragraph by the browser, with space above and below.                        |
+| \<hX\>, \</hX>           | Rendered as an X-level section header. (X = 1,2,3,4,5, or 6)                               |
+| \<ul\>, \</ul\>          | Unordered (bulleted) list.                                                                 |
+| \<ol\>, \</ol\>          | Ordered (numbered) list.                                                                   |
+| \<li\>, \</li\>          | Elements of ordered or unordered list.                                                     |
+| \<table\>, \</table\>    | The beginning and end of a table.                                                          |
+| \<tr\>, \</tr\>          | The beginning and end of a row within a table                                              |
+| \<td\>, \</td\>          | The beginning and end of a column within a row within a table                              |
+| \<form\>, \</form\>      | The beginning and end of an HTML form.                                                     |
+| \<div\>, \</div\>        | The beginning and end of an arbitrary HTML page division.                                  |
+| \<input name=X Type=Y/\> | Define a field within HTML form. X is a unique identifier, Y type of data it accepts.      |
+| \<a href=X\>, \</a\>     | Creates a hyperlink to web page X, with the tags rendered and functional as the link text. |
+| \<img src=X ... /\>      | Displaying an image located at X, with possible additional attributes                      |
+| \<!DOCTYPE html\>        | Specific to HTML5, lets the browser know that's the standard you are using.                |
 
 
