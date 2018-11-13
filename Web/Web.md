@@ -109,3 +109,30 @@ Transmission Control Protocol
 |   \<DATA\>  |
 
 
+# HTTP
+Hypertext Transfer Protocol
+- Application itself has a system of rules for how to interpret the data that was sent.
+- HTTP is an application layer protocol
+  - how one must make a request for a webpage
+  - how a server/host werver delevers that information back to client
+```
+method request-target http-version
+GET request-target HTTP/1.1
+POST request-target HTTP/1.1
+```
+- The host name (domain name of the server) is also included as a separate line of the overall HTTP request.
+- Taken together, the host name and the request target specify a specific resource being sought.
+- Based on the resource status, a number of status codes ca result.
+
+| Class        | Code | Text                  | Comments                                                             |
+|--------------|------|-----------------------|----------------------------------------------------------------------|
+| Success      | 200  | OK                    | All is well, valid request and response.                             |
+| Redirection  | 301  | Moved Permanently     | Page is now at a new location. Automatic redirection.                |
+| Redirection  | 302  | Found                 | Page is now at a new location temporarily.                           |
+| Client Error | 401  | Unauthorized          | Page typically requires login credentials.                           |
+| Client Error | 403  | Forbidden             | Server will not allow request.                                       |
+| Client Error | 404  | Not Found             | Server cannot find what was asked for.                               |
+| Server Error | 500  | Internal Server Error | Generic server failure in responding to the otherwise-valid request. |
+
+
+
