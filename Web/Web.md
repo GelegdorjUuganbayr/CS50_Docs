@@ -73,7 +73,39 @@ Internet Protocol
 - On a large scale, this configuration can dramatically reduce the costs of network infrastructure.
 
 ### IP
+Move the infromation from the sending machine to a receiving machine.
 - Getting information from A to B
 - Split an infromation into packets (small peaces), so a network isn't overly tasked
 - IP is also known as connectionless protocol. There is not necessarily a defined path from the sender to the receiver.
 - Some packets can be "re-routed" around the traffic jam to follow the most optimal path, based on the current state of the network.
+
+---
+
+# TCP
+Transmission Control Protocol
+- Directing the transmitted packet to the correct program/service on the receiving machine
+- Important to identify both:
+  - where the receiver is
+  - what the packet is for
+- TCP and IP are almost an inseparable pair: TCP/IP
+
+### port
+- Program/service/utility on a machine is assigned a port number.
+- Coupled with an IP address, we can uniquely identify a specific program on specific machine.
+- TCP is crucial for **guaranteeing delivery of packets, which IP alone does not do.**
+- TCP includes the information about how many packets the receiver is supposed to get, and what order, and transmitting that information alongside the data.
+
+### TCP standardized port
+- FTP: **21** - file transfer
+- SMTP: **25** - e-mail
+- DNS: **53** - Domain name system
+- HTTP: **80** - Web browsing
+- HTTPS: **443** - Secure web browsing
+
+|   Packet    |
+|:-----------:|
+| Receiver IP |
+| 25 / 1 of 4 |
+|   \<DATA\>  |
+
+
