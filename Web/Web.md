@@ -108,6 +108,7 @@ Transmission Control Protocol
 | 25 / 1 of 4 |
 |   \<DATA\>  |
 
+---
 
 # HTTP
 Hypertext Transfer Protocol
@@ -183,5 +184,68 @@ Hypertext Markup Language: A fundamental component of every website.
 | \<a href=X\>, \</a\>     | Creates a hyperlink to web page X, with the tags rendered and functional as the link text. |
 | \<img src=X ... /\>      | Displaying an image located at X, with possible additional attributes                      |
 | \<!DOCTYPE html\>        | Specific to HTML5, lets the browser know that's the standard you are using.                |
+
+# CSS
+
+Cascading Style Sheets
+- Another language we use to when cunstructing websites.
+- It is the tool we use to customize our website's look and feel.
+- It is a styling language and its syntax decribes how certain attributes of HTML elements should be modified.
+
+```CSS
+body
+{
+  background-color: blue;
+}
+```
+
+- A style sheet is constructed by a selector (body), then open curly brace to indicate the begin and end of the style sheet for that selector.
+- Between the curly brace, key-value pairs of style properties and values for properties will be placed. Each declaration ending with a semicolon.
+
+### Common CSS properties
+**border: style color width**
+- Applies a border of the specified color, width, and style (e.g., dotted, dashed, solid, ridge)
+
+**background-color: [keyword | #<6-digit hex>]**
+- Sets the background color. Some colors are pre-defined in CSS.
+
+**color: [keyword | #<6-digit hex>]**
+- Sets the foreground color (usually text).
+
+**font-size: [absolute size | relative size]**
+- Can use keywords (xx-small, medium...), fixed points (10pt, 12pt...), percentage (80%, 120%) or bas off the most recent font size (smaller, larger).
+
+**font-family: [font name | generic name]**
+- Certain "web safe" fonts are pre-defined in CSS.
+
+**text-align: [left | right | center | justify]**
+- For displaying text
+
+```CSS
+<ID>
+#unique
+{
+  border: 4px dotted blue;
+  text-aligh: right;
+}
+
+<class>
+.students
+{
+  background-color: yellow;
+  opacit: 0.7;
+}
+```
+
+- The selectors don't have to apply only to HTML tag categories.
+- ID selectors and class selectors.
+- ID selector will apply only to an HTML tag with a unique identifier.
+- class selector will apply only to those HTML tags that have been given identical class attrigutes.
+
+Style sheet can be written directly into the HTML
+- Place them within <style> tags within the page's head.
+  
+Style sheet also be written as separate CSS files and then linked in to the document.
+- Use<link> tags within the page's head to accomplish this.
 
 
