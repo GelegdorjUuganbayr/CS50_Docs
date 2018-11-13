@@ -57,3 +57,23 @@ The Domain Name System
     |device| <--private IP--> |router| <--public IP--> |internet|
 - Modern home network consist of access points that combine a router, a modem, a switch, and other devices.
 - Modern business networks of large-scale wide-area networks (WANs) still have these as seprarate devices to allow the size of their network to scale easily.
+
+---
+
+# IP
+Internet Protocol
+- Internet: Interconnected network comprised of smaller networks woven together and agreeing to communicate with on another.
+- The way to know how to communicate with on another: This is the responsibility of the Internet Protocol (IP)
+
+### Router
+- Each network is connected to limited number of routers.
+- Each router had instructions on how to move information toward its destination.
+- This information might be stored in a routing table, inside of the router.
+- The network are not directly connected to each other, and rely on routers to distribute communications.
+- On a large scale, this configuration can dramatically reduce the costs of network infrastructure.
+
+### IP
+- Getting information from A to B
+- Split an infromation into packets (small peaces), so a network isn't overly tasked
+- IP is also known as connectionless protocol. There is not necessarily a defined path from the sender to the receiver.
+- Some packets can be "re-routed" around the traffic jam to follow the most optimal path, based on the current state of the network.
