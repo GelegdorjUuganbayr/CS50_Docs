@@ -1,4 +1,79 @@
 # flask
+- python contains native functionality to support networking and more, enabling site backends to be written in python.
+- Web frameworks make the process easier, abstracting away the minutia of Python's syntax and providing helper functions.
+- Django, Pyramid, Flask
+- HTML suffer from a limitation
+- Incorporating python can make it flexible and dynamic without requiring human intervention.
+- Decorators are used to associate a particular function with a particular URL
+
+**html - current time**
+```html
+<html>
+  <head>
+    <title>Current Time in Cambridge</title>
+  </html>
+  <body>
+    The current time in Cambridge is 14:08
+  </body>
+</html>
+```
+
+**Flask - current time**
+```python
+from flask import Flask
+from datetime import datetime
+from pytz import timezone
+
+app = Flask(__name__) # initiate a Flask application
+
+@app.route("/") # decorator (/ page)
+def time():
+  now = datetime.now(timezone('America/New_York'))
+  return "The current date and time in Cambridge is {}".format(now)
+```
+
+**Command line**
+```
+export FLASK_APP=application.py
+  export FLASK_DEBUG=1
+    flask run
+```
+
+### Passing data
+Data can be passed in via URLs, akin to using HTTP GET.
+```python
+@app.route("/show/<number>")
+def show(number):
+  return "You passed in {}".format(number)
+```
+
+Data can be passed in via HTML forms, as with HTTP POST\
+We need to indicate that Flask should respond to HTTP POST requests explicitly.
+```python
+@app.route("/login", methods=['GET', 'POST']
+def login():
+  if not request.form.get("username")
+    return apology("must provide username")
+```
+
+We could also vary the behavior of our function depending on the type of HTTP request received
+```python
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+  if request.method == "POST":
+    # do one thing
+  else:
+    # do a different thing
+```
+
+### Flask functions
+| Function          	| Description                                                                                     	|
+|-------------------	|-------------------------------------------------------------------------------------------------	|
+| url_for()         	| Instead of specifying exact URL, go to the URL whatever the function it is (e.g. url(log_in())) 	|
+| redirect()        	| Redirect from one page to another                                                               	|
+| session()         	| Track if user is logged in, global variable                                                     	|
+| render_template() 	| Create the page on the site that mixed together HTML with python                                	|
+
 
 ### application.py
 ```python
