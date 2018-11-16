@@ -74,6 +74,7 @@ def login():
 | session()         	| Track if user is logged in, global variable                                                     	|
 | render_template() 	| Create the page on the site that mixed together HTML with python                                	|
 
+---
 
 ### application.py
 ```python
