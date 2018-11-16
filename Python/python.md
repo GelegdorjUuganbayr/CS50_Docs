@@ -1,45 +1,118 @@
 # Python
+### Variabls
+- no type specifier
+- Declared by initialization only
 
-### C
-```C
-#include <stdio.h>
+### Conditionals
+| C       | Python |
+|---------|--------|
+| ||      | or     |
+| &&      | and    |
+| else if | elif   |
+| !       | not    |
 
-int main()
-{
-  printf("hello, world\n");
-  return 0;
-}
+### List (Array)
+- Lists are not fixed in size, it can grow or shrink as needed.
+- You can always tack extra elements onto your array and splice things in and out easily.
+- Declareing a list
+  - nums = [] == nums = list()
+  - nums = [1, 2, 3, 4]
+  - nums = [x for x in range(500)] #[0, ... ,499]
+- append
+  - nums.append(5)    # append value at the last
+  - nums.insert(4, 5) # insert value at fourth location
+  - nums[len(nums):] = [5] # same as append
+  
+### Tuples
+- Tuples are ordered, immutable sets of data.
+- It's great for associating collections of data (like struct in C).
+- Values are unlikely to change.
+
+**List of Tuples**
+```python
+presidents = [
+  ("George Washington", 1789),
+  ("John Adams", 1797),
+  ("Thomas Jefferson", 1801),
+  ("James Madison", 1809)
+]
+
+# Iteration
+for prez, year in presidents:
+  print("In {1}, {0} took office".format(prez, year)) # {1} == year, {0} == prez
 ```
 
-### Python
+### Dictionaries
+- Dictionary allows you to specify list indices with words or phrases (keys), instead of integers.
+- { key : value }
+- When it is iterated, the order is not gueranteed.
 ```python
-def main():
-  print("hello, world)
+pizzas = {
+  "cheese" : 9,
+  "pepperoni" : 10,
+  "vegetable" : 11,
+  "buffalo chicken" : 12
+}
+
+pizzas["cheese"] = 8    # change a value of the key
+if pizza["vegetables"] <12:
+  # do something
+pizzas["bacon"] = 14    # adding new key and value
+
+# Iteration
+for pie in pizzas:  # pie is key of dictionary
+  print(pie)        # print keys
   
+for pie, price in pizzas.items():
+  print(price)      # print values
+  print("A whole {} pizza costs ${}".format(pie, price))  # print keys and values
+  print("A whole " + pie + " pizza costs $" + str(price))
+```
+
+### Functions
+- We don't need to return type of the function and the data types of any parameters
+- All functions are introduced with the def keyword.
+- No need for main
+- If you want to define main:
+```python
 if __name__ == "__main__":
   main()
-
-# while loop
-while True:
-  print("hello, world)
-  
-# for loop
-for i in range(50):
-  print("hello, world")
-
-# if statement
-if x < y:
-  print("x is less than y")
-elif x > y:
-  print("x is greater than y")
-else:
-  print("x is equal to y")
-  
-# Get rid of automatic \n
-for i in range(4):
-  print("?", end="")
-print()
 ```
+
+**Defining the function**
+```python
+def square(x):
+  result = 0
+  for i in range(0,x):
+    result += x
+  return result
+  
+print(square(5))
+```
+
+### Objects
+- python is an object-oriented programming language.
+- Objects have properties
+- Objects also have hethods; functions that are inherent to the object
+- Define a type of object using the **class** keyword
+- self should be its first parameter, which stipulates on what object the method is called.
+
+**Declaring the class**
+```python
+class Student():
+
+  def __init__(self, name, id):
+    self.name = name
+    self.id = id
+    
+  def changeID(self, id):
+    self.id = id
+    
+  def print(self):
+    print("{} - {}".format(self.name, self.id)
+```
+
+## Comparison with C
 
 **C**
 - source code -> compiler -> machine code
