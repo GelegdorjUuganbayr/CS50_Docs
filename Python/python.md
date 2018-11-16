@@ -112,6 +112,8 @@ class Student():
     print("{} - {}".format(self.name, self.id)
 ```
 
+---
+
 ## Comparison with C
 
 **C**
