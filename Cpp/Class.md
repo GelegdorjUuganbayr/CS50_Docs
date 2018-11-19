@@ -195,6 +195,8 @@ int main()
 }
 ```
 
+---
+
 # Inheritance
 New classes can be derived from existing classes using a mechanism called "inheritance".
 - base class: Classes that are derived FROM
@@ -389,6 +391,10 @@ void Student::SayHello()
 }
 ```
 
+---
+
+# Friend
+
 ## Friend Function
 This allows the friend function to access all the members of the class, including private members. Friend functions are non-members, which means they don't receive a "this" pointer. Consequently, they must require an explicit parameter to access an object. 
 
@@ -466,4 +472,84 @@ void Handle::someOperationOnBody()
 {
     body->someData = 42;
 }
+```
+
+---
+
+# Virtual Function
+One of the reasons for using inheritance is to reuse common code across a hierarchy of related classes. 
+- Overriding: the derived classes need to implement specialized versions of some member functions from the base class.
+
+### Person
+```cpp
+/* Person.h */
+class Person
+{
+private:
+    std::string name;
+    int age;
+
+public:
+    virtual void display() const;        // Overrideable function.
+    ...
+};
+
+/* Person.cpp */
+void Person::display() const
+{
+    std::cout << name << ", " << age << std::endl;
+}
+```
+
+**Overriding Virtual Function**
+- When you define a derived class, you can optionally choose to override some or all of the virtual functions defined in the base class. Note that you don't have to override virtual functions if you don't want to. 
+- To override a virtual function in a derived class, re-declare the function in the derived class header file.
+- The function signature must match that in the base class.
+
+### Student
+```cpp
+/* Student.h */
+class Student : public Person
+{
+private:
+    std::string course;
+
+public:
+     virtual void display() const;     // Override function from base class.
+    ...
+};
+
+/* Student.cpp */
+void Student::display() const
+{
+    // Call base-class version of display(), to display person-related info.
+    Person::display();
+
+    // Now display the student-related info.
+    std::cout << course << std::endl;
+}
+```
+
+## Virtual Constructor and Destructor
+```cpp
+class Person
+{
+public:
+    virtual ~Person();
+}
+```
+
+```cpp
+// A base-class pointer can point to that type of object, or to any derived type of object.
+Person * p1 = new Person;
+Person * p2 = new Student;
+```
+
+```cpp
+// Declare a pointer of type Person, which actually points to a Student object.
+Person * p = new Student;
+
+// Call the virtual display() function. This will call the Student display() function, 
+// because that's the type of object p points to at run time.
+p->display();
 ```
