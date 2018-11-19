@@ -267,6 +267,12 @@ public:
 #include "Student.h"
 
 Student::Student()
+    : course("[Unassigned course]")
+{
+}
+
+Student::Student(const std::string & name, int age, const std::string & course)
+    : Person(name, age), course(course)
 {
 }
 
@@ -277,6 +283,12 @@ Student::~Student()
 // this line will cause a compiler error    
 firstName = "Tom";
 ```
+
+**Student::Student()**
+- Automatically use default constructor of Base class + course
+
+**: Person(name, age), course(course)**
+- It does have a base constructor, so it calls base constructor and add course(course)
 
 ### Main.cpp
 ```cpp
@@ -311,5 +323,147 @@ Providing public getters and setters for these private member variables is the p
 ```cpp
 Student::Student():Person("Tom", "Thumb")
 {
+}
+```
+
+## Protected
+- keep certain members of the base class private to the "outside world" 
+- keep certain members of the base class public to derived classes of that base class
+
+### Person.h
+```cpp
+class Person
+{
+private:
+    std::string firstName;
+    std::string lastName;
+
+protected:
+    int age;
+
+public:
+    Person();
+    Person(std::string fName, std::string lName);
+    Person(std::string fName, std::string lName, int age);
+    ~Person();
+
+    void SetFirstName(std::string fName);
+    std::string GetFirstName();
+    void SetLastName(std::string lName);
+    std::string GetLastName();
+    void SayHello();
+};
+```
+
+### Student.cpp
+```cpp
+
+Student::Student()
+{
+}
+
+Student::~Student()
+{
+}
+
+void Student::setAge(int age)
+{
+    if (age < 5)
+    {
+        std::cout << "Student age needs to at least 5 years old." << std::endl;
+    }
+    else
+    {
+        this->age = age;
+    }
+}
+
+int Student::getAge()
+{
+    return this->age;
+}
+
+void Student::SayHello()
+{
+    std::cout << "Hey, how's it goin'?" << std::endl;
+}
+```
+
+## Friend Function
+This allows the friend function to access all the members of the class, including private members. Friend functions are non-members, which means they don't receive a "this" pointer. Consequently, they must require an explicit parameter to access an object. 
+
+### MyClass.h
+```cpp
+class MyClass
+{
+    friend void SomeExternalFunction(MyClass & targetObject);
+    
+    // Data members and member functions, as required.
+    ...
+};
+```
+
+### MyClass.cpp
+```cpp
+#include "MyClass.h"
+
+void SomeExternalFunction(MyClass & targetObject)
+{
+    // Access any members on the target object, i.e. public, private, or protected members.
+    ...
+}
+```
+- Typically, you put friend function implementations in the same source file as member function implementations, because they are all part of the semantic meaning of the same class. 
+- However you don't prefix friend functions with the ClassName:: syntax, because they are not members of the class:
+
+## Friend Classes
+A class can define another class as its friend. A friend class can access all the members of the first class. This is useful if you have a "binary system", that is two classes that are intimately related to each other.
+
+### Body.h
+```cpp
+class Handle;
+
+class Body
+{
+    friend class Handle;
+    
+private:
+    int someData;
+};
+```
+
+### Handle.h
+```cpp
+#include "Body.h"
+
+class Handle
+{
+private:
+    Body *body;
+public:
+    Handle();
+    ~Handle();
+    
+    void someOperationOnBody();
+}
+```
+
+### Handle.cpp
+```cpp
+#include "Handle.h"
+
+Handle::Handle()
+{
+    body = new Body;
+}
+
+Handle::~Handle()
+{
+    delete body;
+}
+
+void Handle::someOperationOnBody()
+{
+    body->someData = 42;
 }
 ```
