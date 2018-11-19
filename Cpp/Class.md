@@ -194,3 +194,122 @@ int main()
     double area = Microsoft::Geometry::Area(radius);
 }
 ```
+
+# Inheritance
+New classes can be derived from existing classes using a mechanism called "inheritance".
+- base class: Classes that are derived FROM
+- sub-class: Derived classes
+
+```cpp
+// Base Class
+class Vehicle
+{ 
+    private:
+       string Make;
+       string Color;
+       ...
+}; 
+
+// Sub Class
+class Car: Vehicle
+{ 
+     // member list includes Make and Color
+     // other Car specific members would go here.
+};
+```
+
+C++ supports three different forms of inheritance
+- public: how a derived class inherits all the member variables of a base class
+- private: only able to directly access the public members of the base class
+- protected: only able to directly access the public members of the base class
+
+### Person.h
+```cpp
+#pragma once
+#include <string>
+
+class Person
+{
+private:
+    std::string firstName;
+    std::string lastName;
+    int age;
+
+public:
+    Person();
+    Person(std::string fName, std::string lName);
+    Person(std::string fName, std::string lName, int age);
+    ~Person();
+    void SayHello();
+};
+```
+
+### Student.h
+```cpp
+#pragma once
+#include "Person.h"
+
+class Student : public Person
+{
+public:
+    Student();
+    ~Student();
+};
+```
+
+**class Student : public Person**
+- <:> This indicates that Student is a derived class of Person using public inheritance.
+- Note that the Student class contains a default constructor and a destructor.
+
+### Student.cpp
+```cpp
+#include "stdafx.h"
+#include "Student.h"
+
+Student::Student()
+{
+}
+
+Student::~Student()
+{
+}
+
+// this line will cause a compiler error    
+firstName = "Tom";
+```
+
+### Main.cpp
+```cpp
+#include "stdafx.h"
+#include "Person.h"
+#include "Student.h"
+
+int main()
+{
+
+    Student student1;
+
+    // this line will generate a compiler error
+    student1.firstName = "Tom";
+
+    // this line is ok
+    student1.SayHello();
+
+
+    return 0;
+}
+```
+
+**student1.firstName = "Tom";**
+- Generate a compiler error even though Student has inherited the firstName member variable from Person. 
+    - firstName member variable is declared as private in Person
+
+**student1.SayHello();**
+- function call will work as SayHello() is a public function
+
+Providing public getters and setters for these private member variables is the proper way to gain access to private and protected from outside the class.
+```cpp
+Student::Student():Person("Tom", "Thumb")
+{
+}
+```
