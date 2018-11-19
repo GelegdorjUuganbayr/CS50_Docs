@@ -161,3 +161,58 @@ document.getElementById("demo").onsubmit = function() {
 - template literal, plug the value of variable
 
 
+### from1.html (Register)
+```javascript
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="form1.js"></script>
+        <title>form1</title>
+    </head>
+    <body>
+        <form action="/register" id="registration" method="get>
+            <input autocomplete="off" autofocus name="email" placeholder="Name" type="text"/>
+            <input name="password" placeholder="Password" type="password"/>
+            <input name="confirmation" placeholder="Password (agina)" type="password"/>
+            <input name="agreement" type="checkbox"/> I agree
+            <input type="submit" value="Register"/>
+        </form>
+    </body>
+</html>
+```
+
+### form1.js
+```javascript
+let form = document.getElementById("registration);
+form.onsubmit = function() {
+    if(!form.email.value)
+    {
+        alert("missing email");
+        return false;
+    }
+    else if(!form.password.value)
+    {
+        alert("missing password");
+        return false;
+    }
+    else if(form.password.value.length < 8)
+    {
+        alert("password too short");
+        return false;
+    }
+    else if(form.password.value != form.confirmation.value)
+    {
+        alert("passwords don't match");
+        return false;
+    }
+    else if(form.agreement.checked)
+    {
+        alert("checkbox unchecked");
+        return false;
+    }
+
+    return true;
+};
+````
+- recursivly download the java script file
