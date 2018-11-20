@@ -234,7 +234,7 @@ class tempStat
     }
 };
 
-// Operator overwrite
+// Operator overloading
 std::istream& operator >> (std::istream& is, tempStat & ts)
 {
     is >> ts.minimum >> ts.maximum;
