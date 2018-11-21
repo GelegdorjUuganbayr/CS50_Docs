@@ -555,3 +555,39 @@ MyDeepClass& MyDeepClass::operator = (const MyDeepClass &rhs)
     return *this;
 }    
 ```
+
+# Allocation Failures
+Allocation failures are usually defined by the bad_alloc exception
+- Memory exhaustion
+    - There are usually not many options for recovery since it means the system has run out of memory
+    - Use the try-catch block around memory allocation calls so any bad_alloc exceptions thrown are caught.
+    - If you have run out of memory you cannot log to file or create any more exception information to pass up the stack
+    - To allocate memory from a reserved pool you would use the placement new syntax
+- Heap corruption
+    - The try-catch block should log the necessary information
+    - Pass the exception up the call stack to allow a graceful termination of the program
+
+- When you do memory resize calls it is important to make sure any iterators on resized collections are also renewed as after a resize they would have invalid indexes.
+- Any index operations such as std::vector::operator[] need to be within the boundary range of the elements otherwise they can cause heap corruption.
+
+### bad_alloc exceoption
+```cpp
+#include <iostream>
+#include <new>
+
+using namespace std;
+
+int main()
+{
+    try {
+        while (true) {
+            int* intarray = new int[99999ul];
+        }
+    }
+    catch (const std::bad_alloc& e) {
+        cout << "bad_alloc caught: " << e.what() << endl;
+    }
+    return 0;
+}
+
+```
