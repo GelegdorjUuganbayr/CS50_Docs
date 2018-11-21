@@ -342,5 +342,216 @@ void myfunction() noexcept(true/false);   //Throws an exception depending on boo
   - It throws an exception and the objects destructor will be called which should release any resources acquired in the constructor
   
 # Casting Exceptions
+### Static Cast
+Static Cast is used to convert from one type to another
+- They should not be used to cast between pointer and non pointer types.
+- There is no run time check to ensure the cast results in a full type of the target type.
+    - User has to ensure the type cast is safe.
+### Const Cast
+Const Cast is used to add or remove the const modifier to a variable
+- It allows the developer to make:
+    - A non modifiable variable modifiable
+    - A modifiable variable non modifiable
+- It can be used to change a variables volatile modifier
+    - Volatile is used to tell the compiler the variable can be modified by another process
+    - When it is used it should check the value every time instead of storing it in the cache and re using it
 
- 
+### Dynamic cast
+Dynamic cast does a run time type check when performing the cast
+- It is safer to use when you know less about the types involved
+
+### Reinterpret cast
+Reinterpret cast will convert pointers between types and integers.
+- Reinterpret cast does not check the pointer type or the type pointed to
+- It is possible to cast between unrelated and incompatible types
+    - Any dereference of the cast is likely to fail, thus reinterpret cast is not safe.
+
+# Mutable
+The mutable keyword is used to declare that a data member can be assigned a value and it can only be applied to non static and non const members.
+-  For const object which need to be able to modify one of its data members, we can declare it mutable
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class myClass {
+private:
+    mutable std::string str;
+public:
+    myClass(std::string s = "")
+    {
+        str = s;
+    }
+    void print() const
+    {
+        cout << str << endl;
+    }
+
+    void change(std::string chgstr) const {
+        str = chgstr;
+    }
+};
+
+int main()
+{
+    const myClass cc("Hello World !!!!");
+    std::string mystring("The string has changed.");
+    cc.change(mystring);
+    cc.print();
+
+    return 0;
+}
+```
+
+# Explicit
+The explicit keyword is used to specify a conversion cannot be used for implicit conversions
+- A conversion constructor can only be used for explicit conversions
+
+```cpp
+#include <iostream>
+
+class explicitConversion
+{
+public:
+    float convertValue;
+    
+    explicit explicitConversion(float floatin) : convertValue{ floatin } {};
+    void printValue(const explicitConversion expC);
+};
+
+void explicitConversion::printValue(const explicitConversion expC) {
+    std::cout << "The value of convertValue is : " << expC.convertValue << std::endl;
+}
+
+class Conversion 
+{
+public:
+    float convertValue;
+    Conversion(float floatin) : convertValue{ floatin } {};
+    void printValue(const Conversion expC);
+};
+
+void Conversion::printValue(const Conversion expC) {
+    std::cout << "The value of convertValue is : " << expC.convertValue << std::endl;
+}
+
+int main(){
+    explicitConversion mycc(100.01);
+    Conversion myc(64.06);
+
+    mycc.printValue(mycc);      //No conversion
+    double myccdouble(53.53);
+    mycc.printValue((explicitConversion)myccdouble);      //Explicit conversion of double to float.
+
+    //Conversion would be illegal with explicit hence wont work with mycc object of type explicitConversion.
+    double mycdouble(23.23);
+    myc.printValue(mycdouble); //Implicit conversion double to float.
+
+    return 0;
+}
+```
+
+# User defined conversion operators
+User defined conversion operators enable explicit or implicit conversion from one class type to another.
+```cpp
+#include <iostream>
+
+class myClass
+{
+public:
+    operator int();
+    explicit operator double();
+};
+
+myClass::operator int() {
+    return 99;
+}
+
+myClass::operator double() {
+    return 22.56;
+}
+
+int main()
+{
+    myClass mc;
+    int myint = mc;  //implicit conversion
+    double mydouble = (double)mc;  //explicit conversion
+    std::cout << " myint is " << myint << " and mydouble is " << mydouble << std::endl;
+
+    return 0;
+}
+```
+
+# Copy Constructors and assignment
+A copy constructor is used to make a copy of an existing object instance.
+```cpp
+someClass( const someClass& other );
+someClass( someClass& other );
+someClass( volatile const someClass& other );
+someClass( volatile someClass& other );
+```
+- If you do not declare a copy constructor the compiler will generate one for you automatically
+- The compiler generated one is only capable of a shallow member copy
+- If you have pointers to memory locations in your class, you will need to declare a copy constructor for a deep copy
+    - The reason for copying memory pointed to by a pointer is that the object which owns the point is responsible for destroying it
+    - If you only copy the pointer the you might have two objects pointing to the same memory location and one of them could delete it
+
+### Deep copy
+```cpp
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class MyDeepClass
+{
+private:
+    int x;
+    char c;
+    std::string s;
+    int* intptr;
+public:
+    //Constructor
+    MyDeepClass(int x, char cc, std::string ss, int* intp);
+
+    //Deep copy constructor
+    MyDeepClass(const MyDeepClass &other);
+
+    //Assignment operator
+    MyDeepClass& operator = (const MyDeepClass &rhs);
+
+    //Print function.
+    void MyDeepClassPrint();
+};
+
+
+void MyDeepClass::MyDeepClassPrint() {
+    cout << x << " " << c << " " << s << " " << *intptr;
+}
+MyDeepClass::MyDeepClass(int xx, char cc, std::string ss, int* intp) :
+    x(xx), c(cc), s(ss), intptr(intp) {
+    cout << "MyDeepClass constructor called " << endl;
+}
+MyDeepClass::MyDeepClass(const MyDeepClass &other) :
+    x(other.x), c(other.c), s(other.s){
+    //copy intptr memory.
+    cout << "MyDeepClass copy constructor called " << endl;
+    delete intptr;
+    intptr = new int(*other.intptr);
+}
+MyDeepClass& MyDeepClass::operator = (const MyDeepClass &rhs)
+{
+    cout << "MyDeepClass operator= called." << endl;
+    //Check for self assignment.
+    if (this != &rhs)
+    {
+        x = rhs.x;
+        c = rhs.c;
+        s = rhs.s;
+        delete intptr;
+        intptr = new int(*rhs.intptr);
+    }
+    return *this;
+}    
+```
