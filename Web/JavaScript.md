@@ -256,7 +256,7 @@ document.getElementById("demo").onsubmit = function() {
 
 
 ### from1.html (Register)
-```javascript
+```html
 <!DOCTYPE html>
 
 <html>
@@ -265,12 +265,12 @@ document.getElementById("demo").onsubmit = function() {
         <title>form1</title>
     </head>
     <body>
-        <form action="\/register" id="registration" method="get>
-            <input autocomplete="off" autofocus name="email" placeholder="Name" type="text"\/>
-            <input name="password" placeholder="Password" type="password"\/>
-            <input name="confirmation" placeholder="Password (agina)" type="password"\/>
-            <input name="agreement" type="checkbox"\/> I agree
-            <input type="submit" value="Register"\/>
+        <form action="/register" id="registration" method="get>
+            <input autocomplete="off" autofocus name="email" placeholder="Name" type="text"/>
+            <input name="password" placeholder="Password" type="password"/>
+            <input name="confirmation" placeholder="Password (agina)" type="password"/>
+            <input name="agreement" type="checkbox"/> I agree
+            <input type="submit" value="Register"/>
         </form>
     </body>
 </html>
@@ -278,7 +278,7 @@ document.getElementById("demo").onsubmit = function() {
 
 ### form1.js
 ```javascript
-let form = document.getElementById("registration);
+let form = document.getElementById("registration)";
 form.onsubmit = function() {
     if(!form.email.value)
     {
