@@ -74,5 +74,5 @@ drwx-w---- : read write execute
 drwx-w---- : read write execute
 -rw--w---- : read write
 ```
-d: directory
+d: directory\
 -: regular file
