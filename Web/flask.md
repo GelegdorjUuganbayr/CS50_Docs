@@ -1,4 +1,6 @@
 # flask
+> flask.pocoo.org/docs/0.12/quickstart/\
+> jinja.pocoo.org/
 - python contains native functionality to support networking and more, enabling site backends to be written in python.
 - Web frameworks make the process easier, abstracting away the minutia of Python's syntax and providing helper functions.
   - Django, Pyramid, Flask
