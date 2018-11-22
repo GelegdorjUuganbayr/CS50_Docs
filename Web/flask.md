@@ -1,8 +1,8 @@
 # flask
 - python contains native functionality to support networking and more, enabling site backends to be written in python.
 - Web frameworks make the process easier, abstracting away the minutia of Python's syntax and providing helper functions.
-- Django, Pyramid, Flask
-- HTML suffer from a limitation
+  - Django, Pyramid, Flask
+- HTML suffer from a limitation - Static
 - Incorporating python can make it flexible and dynamic without requiring human intervention.
 - Decorators are used to associate a particular function with a particular URL
 
@@ -26,7 +26,7 @@ from pytz import timezone
 
 app = Flask(__name__) # initiate a Flask application
 
-@app.route("/") # decorator (/ page)
+@app.route("/")       # decorator (/ page)
 def time():
   now = datetime.now(timezone('America/New_York'))
   return "The current date and time in Cambridge is {}".format(now)
@@ -38,6 +38,8 @@ export FLASK_APP=application.py
   export FLASK_DEBUG=1
     flask run
 ```
+- Saving in memory somewhere the location of the flask application stored in system variable
+- FLASK_DEBUG=1: Something happen, it will show in debug mode
 
 ### Passing data
 Data can be passed in via URLs, akin to using HTTP GET.
