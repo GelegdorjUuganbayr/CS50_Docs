@@ -181,7 +181,7 @@ throwexception destructor called.
 - "Main Exception caught" is not printed because the destructor throw 9 again but there is no more catch for thrown exception.
 - it is not considered good practice to throw exception in an objects destructor.
 
-## Vector Exception handling
+# Vector Exception handling
 - Update two vectors using push_back and either:
   - update both vectors
   - update neither of them to keep them synchronised.
@@ -222,7 +222,7 @@ void updateVector2(std::vector<std::string>& firstvector_, std::vector<std::stri
 - updateVector2 function throws an exception before updating the second vector
   -  the vector sizes being unchanged even though the first vector had already been updated
 
-### Generic multi-vector update exception handling
+### Generic multi-vector update exception handling (Scope-guard)
 ```cpp
 #include <vector>
 #include <string>
