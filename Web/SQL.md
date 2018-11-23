@@ -201,3 +201,49 @@ users
 WHERE
 username = 'newman'
 ```
+
+# Interact with python
+### print title of album
+```python
+import sys
+from cs50 import SQL
+
+db = SQL("sqlite:///lecture.db")
+
+# Query database for all albums
+rows = db.execute("SELECT * FROM Album WHERE Title = :title", title=sys.argv[1])
+
+# For each album in database
+for row in rows:
+
+  # print title of album
+  print(row["Title"])
+```
+
+### put data into the template
+```python
+from flask import Flask, render_template, request
+from cs50 import SQL
+
+app = Flask(__name__)
+db = SQL("sqlite:///lecture.db")
+
+@app.route("/")
+def index():
+  query = request.args.get("q")
+  rows = db.execute("SELECT * FROM Album WHERE Title = :q", q=query)
+  return render_template("index.html", albums=rows)
+```
+
+### index.html
+``` html
+{% block body %}
+  
+    {% for album in albums %}
+
+        {{ album["Title"] }}
+
+    {% endfor %}
+
+{% endblock %}
+```
