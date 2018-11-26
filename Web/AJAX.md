@@ -33,3 +33,137 @@ function ajax_request(argument)
   aj.send();
 }
 ```
+
+## Quote on window
+
+### version0
+```html
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      
+      function quote()
+      {
+        $.getJSON("/quote", {symbol: $("#symbol").val()}, function(data) {
+          alert(data.price);
+        });
+      }
+      
+    </script>
+    <title>form1</title>
+  </head>
+  <body>
+    <form onsubmit="quote(); return false;">
+      <input autocomplete="off" autofocus id="symbol" placeholder="Symbol" type="text"/>
+      <input type="submit" value="Get Quote"/>
+    </form>    
+  </body>
+</html>
+```
+- quote(); return false;
+  - Do not reload the page and Do not submit the form for real
+  - Just call the quote() function
+- $.getJSON
+  - jQuery.getJSON
+- "/quote"
+  - get the data from /quote
+- function(data)
+  - when the data is ready, call back
+  
+### version1
+```html
+<script>
+  
+  $(document).ready(function() {
+    
+    $('#quote').submit(function() {
+  
+      $.getJSON("quote", {symbol: $("#symbol").val()}, function(data) {
+        alert(data.price);
+      });
+      return false;
+  
+    });
+  });
+</script>
+```
+### Same codes
+```html
+let http_parameters = {
+  symbol: $("#symbol").val()
+  symbol: document.getElementById("symbol").value
+};
+$.getJSON("quote", http_parameters, function(data)
+```
+
+```html
+$.getJSON("quote", {symbol: $("#symbol").val()}, function(data) {
+  alert(data.price);
+});
+````
+
+## Navigator (Asyncronisys)
+```html
+<script>
+  
+  navigator.geolocation.getCurrentPositioin(function(position) {
+    document.write(position.coords.latitude + ', ' + position.coords.longitude);
+  });
+  
+</script>
+```
+- navigator.geolocation.getCurrentPositioin
+  - get user's current Location
+  
+## Blink
+```javascript
+function blink()
+{
+  var div = document.getElementById("greeting");
+  if(div.style.visibility == "hidden")
+  {
+    div.style.visibility = "visible";
+  }
+  else
+  {
+    div.style.visibility = "hidden";
+  }
+}
+
+// blink every 500ms
+window.setInterval(blink, 500);
+```
+
+## Map
+```html
+<html>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      function initMap()
+      {
+        let map = new google.maps.Map(document.getElementById("map"), {
+          center: {lat: 39.833, lng: -98.583},
+          zoom: 4
+        });
+      
+        new google.maps.Marker({
+          map: map,
+          position: {lat: 42.3762, lng: -71.1158}
+        });
+      
+        new google.maps.Marker({
+          map: map,
+          position: {lat: 41.3104, lng: -72.9289}
+        });
+      
+      }
+      
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=blahblahblah"/>
+  </body>
+</html>
+            
+```
