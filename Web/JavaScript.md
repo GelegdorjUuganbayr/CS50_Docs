@@ -157,3 +157,181 @@ function alertName(event)
   - what element affectively was passed in to this function
 - innerHTML
   - which button you clicked on
+
+---
+
+# Additional
+### pop-up
+```html
+<html>
+  <head>
+    <script>
+      
+      alert("hello, world");
+      
+    </script>
+  </head>
+  <body>
+    <form id="demo">
+      <input id="name" placeholder="Name" type="text"/>
+      <input type="submit"/>
+  </body>
+</html>
+```
+
+### function - bad practice
+- two different language in a line
+```html
+<html>
+  <head>
+    <script>
+      
+      function greet()
+      {
+        alert("hello, world");
+      }
+      
+    </script>
+  </head>
+  <body>
+    <form id="demo" onsubmit="greet(); return false;">
+      <input autocomplete="off" autofocus id="name" placeholder="Name" type="text"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>
+```
+- return false: stay in where user is
+- autocomplete: history of what user typed
+- autofocus: automatically put cursor in the field
+
+### function - intermediate practice
+```html
+<html>
+  <head>
+    <title>Demo</title>
+  </head>
+  <body>
+    <form id="demo" onsubmit="greet(); return false;">
+      <input autocomplete="off" autofocus id="name" placeholder="Name" type="text"/>
+      <input type="submit"/>
+    </form>
+    <script>
+      
+      function greet()
+      {
+        alert("hello, world");
+      }
+      document.getElementById("demo").onsubmit = greet;
+      
+    </script>
+  </body>
+</html>
+```
+- \<form id="demo"\>
+- document.getElementById("demo").onsubmit
+  - when form "demo" is on submit
+- greet
+  - not greet(), so it doesn't call the function right away
+  - just let browser know when the function called, implement it
+
+### Anonymous function
+```html
+document.getElementById("demo").onsubmit = function() {
+  let name = document.getElementById("name").value;
+  alert("hello, " + name);
+  alert(`hello, ${name}`};
+};
+```
+- alert(`hello, ${name}`};
+  - template literal in JavaScript
+
+## Feedback through new window
+### form1.html
+```html
+<html>
+  <head>
+    <script src="form1.js"></script>
+    <title>form1</title>
+  </head>
+  <body>
+    <form action="/register" id="registration" method="get">
+      <input autocomplete="off" autofocus name="email" placeholder="Email" type="text"/>
+      <input name="password" placeholder="Password" type="password"/>
+      <input name="confirmation" placeholder="Password (again)" type="password"/>
+      <input name="agreement" type="checkbox"/> I agree
+      <input name="submit" value="Register"/>
+    </form>
+  </body>
+</html>
+```
+
+### form1.js
+```javascript
+let form = document.getElementById("registration");
+form.onsubmit = function() {
+
+  if (form.email.value == "")
+  {
+    alert("missing email");
+    return false;
+  }
+  else if (form.password.value == "")
+  {
+    alert("missing email");
+    return false;
+  }
+  else if (form.password.value != form.confirmation.value)
+  {
+    alert("passwords don't match");
+    return false;
+  }
+  else if (!form.agreement.value)
+  {
+    alert("checkbox unchecked");
+    return false;
+  }
+
+  return true;
+}
+```
+
+## jquery
+```html
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      jQuery(document).ready(function() {
+        $("#registration").submit(function() {
+          if(!$("#registration input[name=email]").val())
+          {
+            alert("missing email");
+            return false;
+          }
+      }
+    </script>
+    <title>form1</title>
+  </head>
+  <body>
+    <form action="/register" id="registration" method="get">
+      <input autocomplete="off" autofocus name="email" placeholder="Email" type="text"/>
+      <input name="password" placeholder="Password" type="password"/>
+      <input name="confirmation" placeholder="Password (again)" type="password"/>
+      <input name="agreement" type="checkbox"/> I agree
+      <input name="submit" value="Register"/>
+    </form>
+  </body>
+</html>
+```
+- jQuery(document).ready(function()
+  - take function when it is ready
+  - take function when the document is ready
+- $("#registration").submit(function()
+  - document.getElementById("registration").onsubmit
+- #registration
+  - id is registration
+- input
+  - get input attribute
+- value
+  - get value
