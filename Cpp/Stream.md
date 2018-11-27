@@ -111,5 +111,83 @@ Necessary for parameterized manipulators.
 - it causes the number base to be displayed alongside numbers
   - a leading 0 for octal numbers, and a leading 0x for hexadecimal numbers
 
+# Reference Counted Strings
+Strings have traditionally been implemented as reference counted objects as it would allow fast copy and assignment operation when their internal pointers just have to be moved to existing memory which means no memory allocation/deallocation.
+- The current most popular way of implementing strings is the use of small string optimisation technique. This is done by representing small strings as buffers that are stored entirely within the string object and not allocated on the heap.
+
+```cpp
+class SSOString : public refCounter {
+
+public:
+
+	SSOString() : strBeg(NULL) {}
+
+	SSOString(const char* strptr) : strSize(strlen(strptr)) {
+		if (strSize < 16) {
+			//< 16 chars store in array.
+			memcpy(&str[0], strptr, strSize + 1);
+			strBeg = NULL;
+		}
+		else {
+			//> 16 chars alloctae on heap.
+			strBeg = new char[strSize + 1];
+			memcpy(strBeg, strptr, strSize + 1);
+		}
+	}
+
+	char* begin() {
+		return strSize < 16 ? &str[0] : strBeg; 
+	}
+
+	char* end() {
+		return begin() + strSize;
+	}
+
+	unsigned length() const { 
+		return strSize;
+	}
 
 
+	~SSOString() {
+		if (strBeg) {
+			delete[] strBeg;
+		}
+	}
+
+private:
+	unsigned strSize;
+	char* strBeg;
+	char str[16];
+};
+```
+- The SSOString class above inherits from the refCounter class we created before for reference counting.
+- It defines a default constructor and a constructor that has a char pointer as a parameter.
+- This constructor checks the length of the char pointer and then copies it to the private char array member or copies the pointer to the private char pointer depending on whether it is less than 16 characters or not. 
+- It also defines a begin(), end() and length() function that returns the private members of the char pointer or the char array or the int size.
+- It also has a destructor which deletes the private char pointer if it has been allocated in the constructor. The main function to use this is
+
+### main
+```cpp
+int main(int argc, char* argv[]) {
+
+	//Create referenced object.
+	ReferencedObject< SSOString > ref(new SSOString("Hello World!!")); //13 chars
+	ReferencedObject< SSOString > ref16(new SSOString("This string is over 16 characters long so allocated on Heap")); //13 chars
+
+	//Invocation access
+	cout << "ref value is " << ref->begin() << " with size " << ref->length() << "\n\n";
+	cout << "ref16 value is " << ref16->begin() << " with size " << ref16->length() << "\n\n";
+
+	ReferencedObject< SSOString > refCopy(new SSOString());  // = ref;  // (new SSOString("Hello World!!")); //13 chars
+	refCopy = ref;
+
+	ReferencedObject< SSOString > ref16Copy(new SSOString());  // = ref16;
+	ref16Copy = ref16;
+
+	cout << "refCopy value is " << refCopy->begin() << "\n\n";
+	cout << "ref16Copy value is " << ref16Copy->begin() << "\n\n";
+
+	return 0;
+
+}  
+```
