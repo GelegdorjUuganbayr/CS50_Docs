@@ -12,6 +12,7 @@ var x = 44;
 let i = 0;
 ```
 - Variable does not have strict data type
+- var: local variable
 
 ## Conditionals - if else statement
 ```javascript
