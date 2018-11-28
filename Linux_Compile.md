@@ -123,7 +123,26 @@ $ g++ -Wall -g -o Hello.exe Hello.cpp
 ```
 - o: specifies the output executable filename.
 - Wall: prints "all" Warning messages.
-- g: generates additional symbolic debuggging information for use with gdb debugger.
+- g: generates additional symbolic debuggging information for use with gdb debugger
+
+## Library
+```
+$ gcc -std=c11 -Wall -g program.c /usr/lib/libm.a -o program
+$ gcc -std=c11 -Wall -g program.c -lm -o program
+```
+- -lm: math library
+### user library
+```
+gcc -std=c11 -Wall -Wextra -c weather.c -o weather.so
+
+```
+- -c weather.so
+	- make library with only compiling
+```
+gcc -std=c11 -Wall -Wextra program.c weather.so -o program
+```
+- weather.so
+	- link library
 
 ## Sparate step for compile and link
 ```
