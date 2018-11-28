@@ -193,6 +193,9 @@ int main() {
 ```make
 target: pre-req-1 pre-req-2 ...
 	command
+	
+target (what you wish to produce): what is needed to do so
+	how to produce
 ```
 
 ### makefile - EXAMPLE
