@@ -6,6 +6,7 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
+
   int i, compare, wholeNumber;
   double decimalNumber;
   
