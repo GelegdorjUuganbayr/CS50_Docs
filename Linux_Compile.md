@@ -171,13 +171,13 @@ int main() {
 ```
 
 ### makefile
-```
+```make
 target: pre-req-1 pre-req-2 ...
 	command
 ```
 
 ### makefile - EXAMPLE
-```
+```make
 all: hello.exe
 
 hello.exe: hello.o
@@ -236,7 +236,7 @@ $ make
 - Long line can be broken and continued in several lines via a back-slash (\).
 
 ### Syntax of rules
-```
+```make
 target1 [target2 ...]: [pre-req-1 pre-req-2 ...]
 	[command1
 	 command2
@@ -271,7 +271,7 @@ Automatic variables are set by make after a rule is matched. There include:
 - $^: the filenames of all the prerequisites, separated by spaces, discard duplicates.
 - $+: similar to $^, but includes duplicates.
 - $?: the names of all prerequisites that are newer than the target, separated by spaces.
-```
+```make
 all: hello.exe
 
 hello.exe: hello.o
