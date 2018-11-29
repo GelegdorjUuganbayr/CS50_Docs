@@ -217,8 +217,8 @@ int main(int argc, char* argv[]) {
   - The public functions invoke the execute function on each of the associated command objects.
   
   # Member function pointer
-  ```cpp
-  //Normal function pointer
+```cpp
+//Normal function pointer
 void printString(string s) {
 	cout << s << endl;
 }
@@ -245,7 +245,6 @@ public:
 		cout << "Hello from Derived class. \n";
 	}
 };
-
 
 int main(int argc, char* argv[]) {
 
@@ -276,6 +275,6 @@ int main(int argc, char* argv[]) {
 
 	return 0;
 }   
-  ```
+```
 
 
