@@ -216,7 +216,7 @@ int main(int argc, char* argv[]) {
   - These are initialise in the constructor using the constructor parameters
   - The public functions invoke the execute function on each of the associated command objects.
   
-  # Member function pointer
+# Member function pointer
 ```cpp
 //Normal function pointer
 void printString(string s) {
