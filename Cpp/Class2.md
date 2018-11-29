@@ -155,3 +155,250 @@ int main(int argc, char* argv[]) {
 }	
 ```
 
+# Interfaces
+An interface is used to define the behaviour of classes without saying how to implement it
+- interface are implemented using abstract classes
+	- A class is made abstract by declaring at least one of it's functions as being pure virtual
+	- A function is declared to be pure virtual if it has “=0” at the end of it's declaration
+	- An abstract class contains generalizations about the characteristics of related entities.
+- These entities derive the abstract base class and implement the pure virtual functions
+- Abstract base classes cannot be instantiated and any attempt to do so will result in a compiler error
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+template<class type>
+class Shape {
+
+	//pure virtual function
+	virtual type area() = 0;
+ 
+};
+
+template<class type>
+class Rectangle : public Shape<type>
+{
+private:
+	type width, height;
+public:
+	Rectangle(type wd,type hg) : width(wd),height(hg) {}
+	type area()
+	{
+		return (width * height);
+	}
+	void setWidth(type wd) {
+		width = wd;
+	}
+	void setHeight(type hg) {
+		height = hg;
+	}
+};
+
+template<class type>
+class Triangle : public Shape<type>
+{
+private:
+	type base, altitude;
+public:
+	Triangle(type ba,type alt) : base(ba),altitude(alt) {}
+	type area()
+	{
+		return (base * altitude) / 2;
+	}
+	void setBase(type ba) {
+		base = ba;
+	}
+	void setAltitude(type alt) {
+		altitude = alt;
+	}
+};
+
+int main(int argc, char* argv[]) {
+
+	Rectangle<int> rect(5,5);
+	Triangle<float> tri(3.3,6.5);
+
+	//Helper function.
+	rect.setWidth(3);
+
+	cout << "Rectangle area is " << rect.area() << "\n";
+	printf("Triangle area is %f \n",tri.area());
+
+	return 0;
+}
+```
+
+# Multiple inheritance
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+template<class type>
+class Shape {
+
+	//pure virtual function
+	virtual type area() = 0;
+
+};
+
+class drawShape {
+
+	virtual void draw() = 0;
+
+};
+
+template<class type>
+class Rectangle : public Shape<type>, public drawShape
+{
+private:
+	type width, height;
+public:
+	Rectangle(type wd, type hg) : width(wd), height(hg) {}
+	type area()
+	{
+		return (width * height);
+	}
+	void setWidth(type wd) {
+		width = wd;
+	}
+	void setHeight(type hg) {
+		height = hg;
+	}
+	void draw() {
+		string lhs,spaces,line;
+
+		for (int i = 0; i < width;i++) {
+			spaces = spaces + "  ";
+			line = line + "--";
+		}
+
+		for (int i = 0; i <= height; i++) {
+			if (i == 0) {
+				//top line
+				lhs = lhs + "|" + line + "|\n";
+			}
+			else if (i == height) {
+				//bottom line
+				lhs = lhs + "|" + line + "|\n";
+			}
+			else {
+				lhs = lhs + "|" + spaces + "|\n";
+			}
+		}
+		
+		cout << lhs.c_str();
+		cout << "\n\n";
+	}
+ 
+
+};
+```
+
+# Virtual base classes
+One issue that can arise with multiple inheritance is the diamond problem
+- this is when there is a circular dependency among the inherited classes
+- Now we create a class called CB that inherits both B and C then the compiler needs to work out if we are calling a function in A::B::CB or A::C::CB
+- This situation can usually be resolved by using the virtual keyword when inheriting such as public virtual A
+```cpp
+#include <iostream>
+
+using namespace std;
+
+class A {
+public:
+
+	void printName() {
+		cout << "A\n";
+	}
+};
+
+class B : public A {};
+class C : public A {};
+class CB : public B, public C {};
+
+class D : public virtual A {};
+class F : public virtual A {};
+class DF : public D, public F {};
+
+int main(int argc, char* argv[]) {
+
+	CB cb;
+	//cb.printName();  //Compiler error ambigous printName
+
+	DF df;
+	df.printName();
+
+	return 0;
+}
+```
+- The above code shows the diamond problem and the solution
+- class CB inherits classes B and C which inherit class A
+	- This causes a compiler error saying CB::printName is ambiguous
+- Classes D and F inherit public virtual A and class DF can call DF::printName without error
+
+# Interface Classes
+- Interface classes are not allowed to have implementation or state
+	- Because they only contain pure virtual functions and a virtual destructor
+	- if your objects are going to be unrelated then an interface would be better
+- Abstract classes however can retain both state and implementation
+	- they can contain both virtual and non-virtual functions as well as pure virtual functions
+	- Abstract classes are best used when the derived objects will be closely related
+```cpp
+template<class type>
+class Shape 
+{
+	virtual ~Shape();
+	//pure virtual function
+	virtual type area() = 0;
+	virtual type perimeter() = 0;
+};
+
+# Mixin Classes
+Mixins are used to combine independent classes that share the same base class - multiple inheritance
+```cpp
+#include <iostream>
+
+using namespace std;
+
+class A {
+public:
+	void printName() {
+		cout << "A\n";
+	}
+};
+
+template<class classType>
+class B : public classType {
+public:
+	void printName() {
+		cout << "class B calling A::printName() \n";
+		classType::printName();
+	}
+};
+
+template<class classType>
+class C : public classType {
+public:
+	void printName() {
+		cout << "class C calling B::printName() \n";
+		classType::printName();
+	}
+};
+
+
+int main(int argc,char* argv[]) {
+
+	//Create mixin class.
+	C<B<A>> myMixin;
+
+	myMixin.printName();
+
+	return 0;
+}
+```
