@@ -29,3 +29,9 @@ int main()
 	cout << ptr_test->unq_ptr->a << endl;
 
 }
+
+/*
+std::unique_ptr<OtherClass> SomeClass::foo(new OtherClass);
+std::unique_ptr<OtherClass> SomeClass::foo = static_cast<std::unique_ptr<OtherClass>>(new OtherClass);
+std::unique_ptr<OtherClass> SomeClass::foo = std::make_unique<OtherClass>();
+*/
